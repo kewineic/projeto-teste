@@ -1,0 +1,12 @@
+version: '3.3'
+services: 
+  projeto-teste:
+    container_name: projeto-teste
+    build: .
+    ports:
+      - 8080:8080
+    expose:
+      - 8080
+    command: npm run serve  
+    volumes:
+      - ./view:/usr/src/app

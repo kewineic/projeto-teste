@@ -1,0 +1,26 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release_create:
+    name: Release Create
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        name: Checkout
+
+      - uses: actions/create-release@v1
+        name: Create Release
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: Por favor, verifique o [CHANGELOG.md](https://github.com/Port-Louis/front/blob/master/CHANGELOG.md) para maiores detalhes.
+          draft: false
+          prerelease: false
