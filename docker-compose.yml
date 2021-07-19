@@ -3,6 +3,8 @@ services:
   projeto-teste:
     container_name: projeto-teste
     build: .
+    networks:
+      - redePostgres
     ports:
       - 8080:8080
     expose:
@@ -10,3 +12,20 @@ services:
     command: npm run serve  
     volumes:
       - ./view:/usr/src/app
+    depends_on:
+      - pg
+
+  pg: 
+    image: postgres:13-alpine3.14
+    container_name: pg-database
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
+      - "/etc/localtime:/etc/localtime:ro"
+    networks:
+      - redePostgres
+    ports:
+      - 32780:32780
+
+  networks:
+    redePostgres:
+      driver: bridge
