@@ -1,4 +1,7 @@
 version: '3.3'
+networks:
+  redePostgres:
+    driver: bridge
 services: 
   projeto-teste:
     container_name: projeto-teste
@@ -25,7 +28,3 @@ services:
       - redePostgres
     ports:
       - 32780:32780
-
-  networks:
-    redePostgres:
-      driver: bridge
